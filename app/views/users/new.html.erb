@@ -7,6 +7,12 @@
     <%= f.label :email, "Email:" %>
     <%= f.text_field :email, required: true %>
 
-    <%= f.button "Register" %>
+    <%= f.label :password, 'Password:' %>
+    <%= f.password_field :password %>
+
+    <%= f.label :confirmation, 'Confirmation:' %>
+    <%= f.password_field :confirmation, required: true %>
+
+    <%= f.submit "Register" %>
   <%end%>
 </div>

@@ -70,7 +70,11 @@ describe "When I visit the new viewing party page (/users/:user_id/movies/:movid
       end
 
       expect(page).to have_current_path(user_path(@user))
-      expect(page).to have_content('The Godfather Viewing Party on March 25th, 2023')
+
+
+      within "#hosted-parties" do
+        expect(page).to have_content(@movie.title)
+      end
     end
 
     it 'will validate that the viewing party length is greater than or equal to the duration of the movie' do
