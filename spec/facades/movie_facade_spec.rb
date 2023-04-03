@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe MovieFacade do
   before :each do
-    @user = create(:user)
+    @user = create(:user, password: "password1", password_confirmation: "password1")
    
     params = { :user_id=>@user.id,
                :id=>238

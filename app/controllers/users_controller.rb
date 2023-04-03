@@ -8,13 +8,23 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_attributes)
-    if user.valid?
-      user.save
-      redirect_to user_path(user)
+    new_user = User.new(user_attributes)
+    if new_user.valid?
+      new_user.save
+      redirect_to user_path(new_user)
     else
       redirect_to register_path
-      flash[:error] = user.errors.full_messages
+      flash[:error] = new_user.errors.full_messages
+    end
+  end
+
+  def login_form
+  end
+
+  def login
+    user = User.find_by(email: params[:email])
+    if user.authenticate(params[:password])
+      redirect_to user_path(user)
     end
   end
 

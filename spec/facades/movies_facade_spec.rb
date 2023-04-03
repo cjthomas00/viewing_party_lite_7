@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe MoviesFacade do
   before :each do
-    @user = create(:user)
+    @user = create(:user, password: "password1", password_confirmation: "password1")
     params = {"controller"=>"movies",
       :action=>"index",
       :user_id=>@user.id,

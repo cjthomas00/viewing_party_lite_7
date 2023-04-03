@@ -1,0 +1,62 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.themoviedb.org/3/search/movie?api_key=ebf46d9ab88b772502128d76538d0071&include_adult=false&language=en-US&page=1&query=tobacco%20and%20worms%20for%20breakfast
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Mon, 03 Apr 2023 20:09:08 GMT
+      Server:
+      - openresty
+      Cache-Control:
+      - public, max-age=28782
+      X-Memc:
+      - HIT
+      X-Memc-Key:
+      - e8f74523ba1336403ef7e1271e72aabe
+      X-Memc-Age:
+      - '7819'
+      X-Memc-Expires:
+      - '18071'
+      Etag:
+      - W/"0e23279b004381f72a34159d5c7dfd1f"
+      Vary:
+      - Accept-Encoding
+      - Origin
+      X-Cache:
+      - Hit from cloudfront
+      Via:
+      - 1.1 a70648d67d4a5a7f7eed7b14595ab4fe.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - DEN52-P2
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Amz-Cf-Id:
+      - M5EcdOLtx6upk-wwuFgPnWlb_6w5x2R0doU5T2juWLDLyZ0Y67OPdw==
+      Age:
+      - '747'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"page":1,"results":[],"total_pages":1,"total_results":0}'
+  recorded_at: Mon, 03 Apr 2023 20:21:35 GMT
+recorded_with: VCR 6.1.0

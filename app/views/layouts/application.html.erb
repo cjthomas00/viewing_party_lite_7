@@ -14,13 +14,12 @@
   <div class="links">
     <nav>
       <%= link_to "Home Page", root_path %>
+      <%= link_to "Log in", login_path %>
     </nav>
   </div>
-    <% flash.each do |type, msg| %>
-      <div>
-        <%= msg %>
-      </div>
-      <%end%>
+   <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, class: name %>
+    <% end %>
     </div>
     <%= yield %>
   </body>

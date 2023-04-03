@@ -59,6 +59,19 @@ RSpec.describe "Register", type: :feature do
       click_button("Register")
       expect(page).to have_content("Name can't be blank")
       expect(current_path).to eq(register_path)
+
+      fill_in "Name", with: "Max Power"
+      fill_in "Email", with: "mpower@aol.com"
+      fill_in :password, with: "password"
+      click_button("Register")
+      expect(page).to have_content("Password confirmation doesn't match Password")
+      expect(current_path).to eq(register_path)
+
+      fill_in "Name", with: "Max Power"
+      fill_in "Email", with: "mpower@aol.com"
+      click_button("Register")
+      expect(page).to have_content("Password can't be blank")
+      expect(current_path).to eq(register_path)
     end
   end
 end
