@@ -4,9 +4,9 @@ describe "when I visit the user dashboard page" do
   describe "i should see" do
     before :each do
       VCR.use_cassette("godfather_5") do
-        @user = create(:user, password: "password1", password_confirmation: "password1")
-        @user2 = create(:user, password: "password1", password_confirmation: "password1")
-        @user3 = create(:user, password: "password1", password_confirmation: "password1")
+        @user = create(:user)
+        @user2 = create(:user)
+        @user3 = create(:user)
         @vp1 = ViewingParty.create!({duration: 180, party_date: Date.new(2011, 1, 1,), start_time: '21:00', movie_id: 238})
         @vp2 = ViewingParty.create!({duration: 183, party_date: Date.new(2011, 2, 1,), start_time: '21:00', movie_id: 239})
         @vp3 = ViewingParty.create!({duration: 190, party_date: Date.new(2011, 3, 1,), start_time: '21:00', movie_id: 550})

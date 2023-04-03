@@ -4,7 +4,7 @@ describe "When I visit the discover movies page, and click on either the Top Mov
   describe "I should be taken to the movie results page where I see:" do
     describe "user clicked top movies button" do
       before :each do
-        @user = create(:user, password: "password1", password_confirmation: "password1")
+        @user = create(:user)
         visit user_movies_discover_path(@user)
         VCR.use_cassette("top_rated_movies") do
           click_button "Discover Top Rated Movies"

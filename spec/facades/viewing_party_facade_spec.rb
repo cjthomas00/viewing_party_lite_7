@@ -2,14 +2,14 @@ require 'rails_helper'
 
 describe ViewingPartyFacade do
   before :each do
-    @user = create(:user, password: "password1", password_confirmation: "password1")
-    @user2 = create(:user, password: "password1", password_confirmation: "password1")
-    @user3 = create(:user, password: "password1", password_confirmation: "password1")
-    @user4 = create(:user, password: "password1", password_confirmation: "password1")
-    @user5 = create(:user, password: "password1", password_confirmation: "password1")
-    @user6 = create(:user, password: "password1", password_confirmation: "password1")
-    @user7 = create(:user, password: "password1", password_confirmation: "password1")
-    @user8 = create(:user, password: "password1", password_confirmation: "password1")
+    @user = create(:user)
+    @user2 = create(:user)
+    @user3 = create(:user)
+    @user4 = create(:user)
+    @user5 = create(:user)
+    @user6 = create(:user)
+    @user7 = create(:user)
+    @user8 = create(:user)
     params = {"controller"=>"movies",
       :action=>"index",
       :user_id=>@user.id,

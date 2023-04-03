@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Welcome Page", type: :feature do
   before :each do
-    @user = create(:user, password: "password1", password_confirmation: "password1")
+    @user = create(:user)
     visit "/"
   end
   
@@ -29,7 +29,5 @@ RSpec.describe "Welcome Page", type: :feature do
         expect(page).to have_no_link("#{@user.name}")
       end
     end
-
-
   end
 end

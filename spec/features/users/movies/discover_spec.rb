@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "When I visit the '/users/:id/discover' path, where :id, is the id of a valid user" do
   before :each do
-    @user = create(:user, password: "password1", password_confirmation: "password1")
+    @user = create(:user)
 
     visit user_movies_discover_path(@user)
   end

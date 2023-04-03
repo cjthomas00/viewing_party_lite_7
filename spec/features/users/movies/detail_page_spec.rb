@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "Details Page", type: :feature do
   describe "When I visit a movie's detail page (/users/:user_id/movies/:movie_id where :id is a valid user id,I should see" do
     before :each do
-      @user = create(:user, password: "password1", password_confirmation: "password1")
+      @user = create(:user)
     #   attrs = {
     #   id: 238,
     #   title: "The Godfather",

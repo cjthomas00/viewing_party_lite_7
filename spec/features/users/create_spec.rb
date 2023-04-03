@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "Register", type: :feature do
   describe "When a user visits the '/register' path" do
     before :each do 
-      @user1 = User.create!(name: "Mike Smith", email: "msmith@gmail.com", password: "password1", password_confirmation: "password1")
+      @user1 = User.create!(name: "Mike Smith", email: "msmith@gmail.com", password: "password1") 
       visit "/register"
     end
 
@@ -14,7 +14,6 @@ RSpec.describe "Register", type: :feature do
       expect(page).to have_field("Name:")
       expect(page).to have_field("Email:")
       expect(page).to have_field("Password:")
-      expect(page).to have_field("Confirm Password:")
       expect(page).to have_button("Register")
     end
 
@@ -23,7 +22,6 @@ RSpec.describe "Register", type: :feature do
       fill_in "Name", with: "Max Power"
       fill_in "Email", with: "mpower@aol.com"
       fill_in :password, with: "qwerty"
-      fill_in :password_confirmation, with: "qwerty"
       click_button("Register")
       user = User.last
 
@@ -43,7 +41,6 @@ RSpec.describe "Register", type: :feature do
       fill_in "Name", with: "Max Power"
       fill_in "Email", with: "msmith@gmail.com"
       fill_in :password, with: "qwerty"
-      fill_in :password_confirmation, with: "qwerty"
       click_button("Register")
       expect(current_path).to eq(register_path)
       expect(page).to have_content("Email has already been taken")
@@ -58,13 +55,6 @@ RSpec.describe "Register", type: :feature do
       fill_in "Email", with: "mpower@aol.com"
       click_button("Register")
       expect(page).to have_content("Name can't be blank")
-      expect(current_path).to eq(register_path)
-
-      fill_in "Name", with: "Max Power"
-      fill_in "Email", with: "mpower@aol.com"
-      fill_in :password, with: "password"
-      click_button("Register")
-      expect(page).to have_content("Password confirmation doesn't match Password")
       expect(current_path).to eq(register_path)
 
       fill_in "Name", with: "Max Power"
