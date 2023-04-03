@@ -29,7 +29,22 @@ describe 'as a registerd user' do
 
         expect(page).to have_current_path(user_path(@user_1))
       end
+    end
 
+    describe "sad path" do
+      it "keeps you on the login page with a flash message if login credentials are invalid" do
+        @user_1 = create(:user)
+
+        visit '/'
+        click_on "Log In"
+
+        fill_in 'Email', with: @user_1.email
+        fill_in 'Password', with: "not it"
+
+        click_on 'Log In'
+
+        expect(page).to have_content("Sorry, your credentials are bad.")
+      end
     end
   end
 end
