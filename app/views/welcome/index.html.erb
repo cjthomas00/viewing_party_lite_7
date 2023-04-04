@@ -10,10 +10,12 @@
 </div>
 
 <div class = "existing_users">
+<%if @session_user%>
   <h2>Existing Users</h2>
-  <%@users.each do |user|%>
-  <div id= "user_names-<%=user.id%>">
-    <%= link_to user.name, "/users/#{user.id}" %>
+    <%@users.each do |user|%>
+      <div id= "user_names-<%=user.id%>">
+        <%=user.email%>
+      </div>  
     <%end%>
-  </div>  
+  <%end%>
 </div>

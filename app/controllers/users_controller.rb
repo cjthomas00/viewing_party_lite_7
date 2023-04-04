@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
   def show
-    # @user = User.find(params[:id])
-    @facade = UserFacade.new(params)
+    if session[:user_id]
+      @facade = UserFacade.new(params)  
+    else
+      redirect_to root_path
+      flash[:notice] = "You must be logged in and registered to view your dashboard"
+    end
   end
 
   def new
@@ -32,9 +36,7 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome, #{user.name}!"
       if user.admin?
         redirect_to admin_dashboard_path
-      elsif user.manager?
-        redirect_to root_path
-      elsif
+      elsif user.default?
         redirect_to user_path(user)
       end
     else
