@@ -34,6 +34,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def logout
+    session[:user_id] = nil
+    redirect_to root_path
+    flash[:notice] = "You have been logged out."
+  end
+
   private
   def user_attributes
     params.permit(:name, :email, :password, :password_confirmation)
