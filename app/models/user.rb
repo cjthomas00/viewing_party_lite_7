@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  enum role: %w(default manager admin)
+
   def hosted_parties
     viewing_parties.where("host = true")
   end
