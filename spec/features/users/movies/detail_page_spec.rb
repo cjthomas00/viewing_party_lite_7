@@ -4,29 +4,11 @@ RSpec.describe "Details Page", type: :feature do
   describe "When I visit a movie's detail page (/users/:user_id/movies/:movie_id where :id is a valid user id,I should see" do
     before :each do
       @user = create(:user)
-    #   attrs = {
-    #   id: 238,
-    #   title: "The Godfather",
-    #   vote_average: 8.7,
-    #   runtime: 175,
-    #   genres: [
-    #   {
-    #       "id": 18,
-    #       "name": "Drama"
-    #   },
-    #   {
-    #       "id": 80,
-    #       "name": "Crime"
-    #   }
-    #   ],
-    #   overview: "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge."
-    # }
-    #   @movie = Movie.new(attrs)
-      # require 'pry'; binding.pry
       VCR.use_cassette("godfather_movie_2") do
         visit user_movie_path(@user, 238)
       end
     end
+
     it "A Button to create a viewing party" do
       expect(page).to have_button("Create Viewing Party")
     end
@@ -85,6 +67,16 @@ RSpec.describe "Details Page", type: :feature do
         expect(page).to have_content("Review: The Godfather Review by Al Carlson")
         expect(page).to have_content("Created at: 2014-04-10T20:09:40.500Z")
         expect(page).to have_content("Author: crastana")
+      end
+    end
+      
+    it "If I go to a movies show page And click the button to create a viewing party I'm redirected to the movies show page, and a message appears to let me know I must be logged in or registered to create a movie party. " do
+      @user = create(:user)
+      VCR.use_cassette("godfather_movie_7") do
+        visit user_movie_path(@user, 238)
+        click_button "Create Viewing Party"
+        expect(page).to have_content("Please login or register to create a viewing party.")
+        expect(current_path).to eq(root_path)
       end
     end
   end
