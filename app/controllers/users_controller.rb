@@ -9,8 +9,9 @@ class UsersController < ApplicationController
   end
 
   def create
-    new_user = User.new(user_attributes)
+    new_user = User.create(user_attributes)
     if new_user.valid?
+      session[:user_id] = new_user.id
       new_user.save
       redirect_to user_path(new_user)
     else
@@ -25,6 +26,7 @@ class UsersController < ApplicationController
   def login
     user = User.find_by(email: params[:email])
     if user.authenticate(params[:password])
+      session[:user_id] = user.id
       redirect_to user_path(user)
     else
       flash.now[:error] = "Sorry, your credentials are bad."

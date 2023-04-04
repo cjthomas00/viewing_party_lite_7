@@ -1,7 +1,12 @@
 <h1>Viewing Party Lite</h1>
 
 <div class = "new_user">
-  <%= button_to "Register New User", register_path, method: :get %>
+  <% if current_user %> 
+    <%= link_to "Log Out" %>
+  <% else %>
+    <%= link_to "Log in", login_path %>
+    <%= button_to "Register New User", register_path, method: :get %>
+  <% end %>
 </div>
 
 <div class = "existing_users">

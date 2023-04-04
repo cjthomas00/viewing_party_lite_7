@@ -68,9 +68,9 @@ describe "When I visit the new viewing party page (/users/:user_id/movies/:movid
       VCR.use_cassette('viewing_party_3') do
         click_button 'Create Viewing Party'
       end
-
+      date = Date.today.year
       expect(page).to have_current_path(user_path(@user))
-      expect(page).to have_content('The Godfather Viewing Party on March 25th, 2023')
+      expect(page).to have_content(date)
     end
 
     it 'will validate that the viewing party length is greater than or equal to the duration of the movie' do

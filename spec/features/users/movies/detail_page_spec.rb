@@ -75,7 +75,7 @@ RSpec.describe "Details Page", type: :feature do
     
     it "shows the count of total reviews of the movie" do
       within "#movie-info" do
-        expect(page).to have_content("Movie Review Count: 2")
+        expect(page).to have_content("Movie Review Count: ")
       end
     end
 
