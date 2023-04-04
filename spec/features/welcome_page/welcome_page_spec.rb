@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "Welcome Page", type: :feature do
   before :each do
     @user = create(:user)
-    visit "/"
+    visit root_path
   end
   
   describe "When a user visits the root path they should be on the landing page ('/') which includes:" do
@@ -15,10 +15,16 @@ RSpec.describe "Welcome Page", type: :feature do
       expect(page).to have_button("Register New User")
     end
 
-    it "has a List of Existing Users" do
+    it "has a List of Existing Users if logged in" do
+      user1 = User.create!(name: "Mike Smith", email: "msmith@gmail.com", password: "password1")
+      click_on "Log in"
+      fill_in :email, with: user1.email
+      fill_in :password, with: user1.password
+      click_on "Log In"
+      visit root_path
       expect(page).to have_content("Existing Users")
       within(".existing_users") do
-        expect(page).to have_link("#{@user.name}")
+        expect(page).to have_content("#{@user.email}")
         expect(page).to have_no_link("Home Page")
       end
     end
