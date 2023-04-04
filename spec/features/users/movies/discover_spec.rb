@@ -31,7 +31,7 @@ describe "When I visit the '/users/:id/discover' path, where :id, is the id of a
         click_button "Discover Top Rated Movies"
       end
 
-      expect(page).to have_current_path("/users/#{@user.id}/movies")
+      expect(page).to have_current_path(user_movies_path(@user))
     end
 
     it "When the user clicks on the search button, they should be taken to the movies results page" do
@@ -41,7 +41,7 @@ describe "When I visit the '/users/:id/discover' path, where :id, is the id of a
           click_button "Search by Movie Title"
         end
 
-        expect(page.current_path).to eq("/users/#{@user.id}/movies")
+        expect(page.current_path).to eq(user_movies_path(@user))
       end
     end
 
