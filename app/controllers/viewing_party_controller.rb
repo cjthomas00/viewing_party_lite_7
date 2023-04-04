@@ -1,6 +1,11 @@
 class ViewingPartyController < ApplicationController
   def new
-    @facade = ViewingPartyFacade.new(params)
+    if session[:user_id] == nil 
+      flash[:error] = "Please login or register to create a viewing party."
+      redirect_to root_path
+    else
+      @facade = ViewingPartyFacade.new(params)
+    end
   end
 
   def create

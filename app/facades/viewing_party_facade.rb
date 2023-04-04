@@ -1,5 +1,6 @@
 class ViewingPartyFacade
-  attr_reader :user
+  attr_reader :user, 
+              :movie_id
 
   def initialize(params, viewing_party = nil)
     @user = User.find(params[:user_id])
