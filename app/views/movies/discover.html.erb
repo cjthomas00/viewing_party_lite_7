@@ -5,7 +5,7 @@
 <div id="search">
   <%= form_with url: user_movies_path(@user), local: true, method: :get do |form|%>
     <%= form.label :movie_title, "Enter Movie Title Keyword(s)" %>
-    <%= form.text_field :movie_title %>
+    <%= form.text_field :movie_title, required: true %>
     <%= form.submit 'Search by Movie Title' %>
   <% end %>
 </div>

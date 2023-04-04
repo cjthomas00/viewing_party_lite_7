@@ -1,11 +1,14 @@
 class UsersController < ApplicationController
   def show
-    # @user = User.find(params[:id])
-    @facade = UserFacade.new(params)
+    if session[:user_id] == nil
+      flash[:error] = "Please login or register to visit your dashboard."
+      redirect_to root_path
+    else
+      @facade = UserFacade.new(params)
+    end
   end
 
   def new
-    # @user = User.new
   end
 
   def create
@@ -25,12 +28,12 @@ class UsersController < ApplicationController
 
   def login
     user = User.find_by(email: params[:email])
-    if user.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect_to user_path(user)
-    else
+    if user.nil? || !user.authenticate(params[:password])
       flash.now[:error] = "Sorry, your credentials are bad."
       render :login_form, status: 400
+    else user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect_to user_path(user)
     end
   end
 

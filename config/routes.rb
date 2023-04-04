@@ -6,8 +6,9 @@ Rails.application.routes.draw do
   get "/login", to: "users#login_form"
   post "/login", to: "users#login"
   get "/logout", to: "users#logout"
-
-  resources :users, only: [:show, :create]  do
+  
+  resources :users, only: :create 
+  resources :users, only: [:show], path: "/dashboard"  do
     resources :movies, only: [:index, :show] do 
       resources :viewing_party, only: [:new, :create]
     end
