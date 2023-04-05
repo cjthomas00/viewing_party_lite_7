@@ -1,17 +1,28 @@
 class MoviesController < ApplicationController
   def discover
-    @user = User.find(params[:user_id])
+    @user = current_user
   end
 
   def index
-    @facade = MoviesFacade.new(params)
+    movie_title = params[:movie_title]
+    @facade = MoviesFacade.new(movie_title, current_user)
     if @facade.empty_request?
-      redirect_to user_movies_discover_path(@facade.user)
+      redirect_to discover_user_path
       flash[:notice] = "No movie results found for '#{@facade.movie_results}'"
     end
   end
 
   def show
-    @facade = MovieFacade.new(params)
+    @facade = MovieFacade.new(params[:id], current_user)
   end
 end
+
+
+
+
+
+
+
+
+
+

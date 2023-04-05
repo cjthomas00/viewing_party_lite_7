@@ -13,9 +13,10 @@ describe ViewingPartyFacade do
     params = {"controller"=>"movies",
       :action=>"index",
       :user_id=>@user.id,
-      :movie_title=>"Despicable"}
-    @movie_facade = MovieFacade.new(params)
-    @vp_facade = ViewingPartyFacade.new(params)
+      :movie_title=>"Despicable", 
+      :movie_id => 238 }
+    @movie_facade = MovieFacade.new(params[:movie_title], @user)
+    @vp_facade = ViewingPartyFacade.new(@user, params)
   end
 
   it 'can create a new ViewingPartyFacade' do

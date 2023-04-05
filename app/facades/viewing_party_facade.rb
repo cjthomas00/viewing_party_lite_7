@@ -2,10 +2,9 @@ class ViewingPartyFacade
   attr_reader :user, 
               :movie_id
 
-  def initialize(params, viewing_party = nil)
-    @user = User.find(params[:user_id])
+  def initialize(user, params, viewing_party = nil)
+    @user = user
     @movie_id = params[:movie_id]
-    # @viewing_party = ViewingParty.find(params[:viewing_party_id]) if viewing_party.present?
   end
 
   def service

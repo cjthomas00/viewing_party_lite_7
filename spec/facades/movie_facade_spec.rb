@@ -3,11 +3,7 @@ require "rails_helper"
 RSpec.describe MovieFacade do
   before :each do
     @user = create(:user)
-   
-    params = { :user_id=>@user.id,
-               :id=>238
-              }
-    @facade = MovieFacade.new(params)
+    @facade = MovieFacade.new(238, @user)
   end
 
   it 'can create a new MoviesFacade' do

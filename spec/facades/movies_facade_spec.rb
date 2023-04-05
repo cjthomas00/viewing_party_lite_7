@@ -3,11 +3,7 @@ require 'rails_helper'
 describe MoviesFacade do
   before :each do
     @user = create(:user)
-    params = {"controller"=>"movies",
-      :action=>"index",
-      :user_id=>@user.id,
-      :movie_title=>"Despicable"}
-    @facade = MoviesFacade.new(params)
+    @facade = MoviesFacade.new("Despicable", @user)
   end
 
   it 'can create a new MoviesFacade' do
@@ -25,19 +21,13 @@ describe MoviesFacade do
   end
 
   it 'can determine the request type as top_rated' do
-    params = {"controller"=>"movies",
-      :action=>"index",
-      :user_id=>@user.id}
-    facade = MoviesFacade.new(params)
+    facade = MoviesFacade.new(@user)
 
     expect(facade.request_type).to eq("top_rated")
   end
 
   it 'can determine the top_rated movies' do
-    params = {"controller"=>"movies",
-      :action=>"index",
-      :user_id=>@user.id}
-    facade = MoviesFacade.new(params)
+    facade = MoviesFacade.new(@user)
 
     VCR.use_cassette("top_rated") do
       @result_0 = facade.top_rated_movies
@@ -62,7 +52,7 @@ describe MoviesFacade do
       :action=>"index",
       :user_id=>@user.id,
       :movie_title=>"tobacco and worms for breakfast"}
-    @facade = MoviesFacade.new(params)
+    @facade = MoviesFacade.new(params[:movie_title], @user)
 
     VCR.use_cassette('nil_search_results') do
       @result_2 = @facade.empty_request?
@@ -70,8 +60,4 @@ describe MoviesFacade do
 
     expect(@result_2).to eq(true)
   end
-
-
-
-
 end

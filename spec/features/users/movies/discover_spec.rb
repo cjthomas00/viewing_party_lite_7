@@ -3,8 +3,8 @@ require "rails_helper"
 describe "When I visit the '/users/:id/discover' path, where :id, is the id of a valid user" do
   before :each do
     @user = create(:user)
-
-    visit user_movies_discover_path(@user)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+    visit discover_user_path
   end
 
   describe "i should see" do
@@ -31,7 +31,7 @@ describe "When I visit the '/users/:id/discover' path, where :id, is the id of a
         click_button "Discover Top Rated Movies"
       end
 
-      expect(page).to have_current_path(user_movies_path(@user))
+      expect(page).to have_current_path(user_movies_path)
     end
 
     it "When the user clicks on the search button, they should be taken to the movies results page" do
@@ -41,7 +41,7 @@ describe "When I visit the '/users/:id/discover' path, where :id, is the id of a
           click_button "Search by Movie Title"
         end
 
-        expect(page.current_path).to eq(user_movies_path(@user))
+        expect(page.current_path).to eq(user_movies_path)
       end
     end
 
@@ -52,7 +52,7 @@ describe "When I visit the '/users/:id/discover' path, where :id, is the id of a
           click_button "Search by Movie Title"
         end
         
-        expect(page).to have_current_path(user_movies_discover_path(@user))
+        expect(page).to have_current_path(discover_user_path)
       end
       expect(page).to have_content("No movie results found for 'tobacco and worms for breakfast'")
     end

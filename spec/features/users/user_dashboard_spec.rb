@@ -19,7 +19,7 @@ describe "when I visit the user dashboard page" do
         ViewingPartyUser.create!(user_id: @user2.id, viewing_party_id: @vp1.id, host: false)
         ViewingPartyUser.create!(user_id: @user.id, viewing_party_id: @vp2.id, host: false)
         ViewingPartyUser.create!(user_id: @user3.id, viewing_party_id: @vp2.id, host: true)
-        visit user_path(@user)
+        visit user_path
       end
     end
 
@@ -32,7 +32,7 @@ describe "when I visit the user dashboard page" do
 
       click_button "Discover Movies"
 
-      expect(page).to have_current_path(user_movies_discover_path(@user))
+      expect(page).to have_current_path(discover_user_path)
     end
 
     it "a section that lists hosted parties" do
@@ -71,13 +71,13 @@ describe "when I visit the user dashboard page" do
       end
     end
 
-    xit "list of users invited with my name in bold" do
-      within "#attended-parties" do
-        within "#party-#{@vp2.id}" do
-        expect(page).to have_content(@user.name)
-        end
-      end
-    end
+    # xit "list of users invited with my name in bold" do
+    #   within "#attended-parties" do
+    #     within "#party-#{@vp2.id}" do
+    #     expect(page).to have_content(@user.name)
+    #     end
+    #   end
+    # end
 
     it "a section that lists attended parties" do
       within "#attended-parties" do

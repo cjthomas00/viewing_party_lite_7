@@ -4,7 +4,7 @@ class UsersController < ApplicationController
       flash[:error] = "Please login or register to visit your dashboard."
       redirect_to root_path
     else
-      @facade = UserFacade.new(params)
+      @facade = UserFacade.new(current_user)
     end
   end
 
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     if new_user.valid?
       session[:user_id] = new_user.id
       new_user.save
-      redirect_to user_path(new_user)
+      redirect_to user_path
     else
       redirect_to register_path
       flash[:error] = new_user.errors.full_messages
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
       render :login_form, status: 400
     else user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to user_path(user)
+      redirect_to user_path
     end
   end
 

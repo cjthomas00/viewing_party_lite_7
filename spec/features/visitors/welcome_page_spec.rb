@@ -12,7 +12,7 @@ RSpec.describe "Welcome Page as a Visitor" do
   end
 
   it "And then try to visit '/dashboard' I remain on the landing page And I see a message telling me that I must be logged in or registered to access my dashboard" do
-    visit user_path(@user1)
+    visit user_path
     expect(page).to have_content("Please login or register to visit your dashboard.")
     expect(current_path).to eq(root_path)
   end

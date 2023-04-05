@@ -1,9 +1,9 @@
 class MoviesFacade
   attr_reader :user, :movie_results
 
-  def initialize(params)
-    @user = User.find(params[:user_id])
-    @movie_results = params[:movie_title]
+  def initialize(movie_title = nil, user)
+    @user = user
+    @movie_results = movie_title
   end
 
   def service

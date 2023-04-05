@@ -4,8 +4,9 @@ RSpec.describe "Details Page", type: :feature do
   describe "When I visit a movie's detail page (/users/:user_id/movies/:movie_id where :id is a valid user id,I should see" do
     before :each do
       @user = create(:user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
       VCR.use_cassette("godfather_movie_2") do
-        visit user_movie_path(@user, 238)
+        visit user_movie_path(238)
       end
     end
 
@@ -73,7 +74,7 @@ RSpec.describe "Details Page", type: :feature do
     it "If I go to a movies show page And click the button to create a viewing party I'm redirected to the movies show page, and a message appears to let me know I must be logged in or registered to create a movie party. " do
       @user = create(:user)
       VCR.use_cassette("godfather_movie_7") do
-        visit user_movie_path(@user, 238)
+        visit user_movie_path(238)
         click_button "Create Viewing Party"
         expect(page).to have_content("Please login or register to create a viewing party.")
         expect(current_path).to eq(root_path)

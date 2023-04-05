@@ -18,9 +18,9 @@ describe "When I visit the new viewing party page (/users/:user_id/movies/:movid
 
     
     VCR.use_cassette('viewing_party_2') do
-      facade = MovieFacade.new({id: 238, user_id: @user.id})
+      facade = MovieFacade.new(238, @user)
       @movie = facade.movie
-      visit new_user_movie_viewing_party_path(@user, @movie.id)
+      visit new_user_movie_viewing_party_path(@movie.id)
     end
   end
 
@@ -74,7 +74,7 @@ describe "When I visit the new viewing party page (/users/:user_id/movies/:movid
         click_button 'Create Viewing Party'
       end
       date = Date.today.year
-      expect(page).to have_current_path(user_path(@user))
+      expect(page).to have_current_path(user_path)
       expect(page).to have_content(date)
     end
 
@@ -91,7 +91,7 @@ describe "When I visit the new viewing party page (/users/:user_id/movies/:movid
       end
 
 
-      expect(page).to have_current_path(new_user_movie_viewing_party_path(@user, @movie.id))
+      expect(page).to have_current_path(new_user_movie_viewing_party_path(@movie.id))
       expect(page).to have_content('Duration must be greater than or equal to movie runtime: 175 minutes')
     end
 
@@ -108,9 +108,9 @@ describe "When I visit the new viewing party page (/users/:user_id/movies/:movid
     #     click_button 'Create Viewing Party'
     #   end
       
-    #   expect(page).to have_current_path(user_path(@user))  
+    #   expect(page).to have_current_path(user_path)  
 
-    #   visit user_path(@user2)
+    #   visit user_path
 
     #   expect(page).to have_content('The Godfather Viewing Party on March 25th, 2023')
     # end

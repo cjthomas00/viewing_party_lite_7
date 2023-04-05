@@ -1,5 +1,5 @@
 <h1>Create a New Viewing Party for <%=@facade.movie.title%></h1>
-<%=form_with model: @facade.new_viewing_party, local: true, url: user_movie_viewing_party_index_path(@facade.user, @facade.movie.id) do |form|%>
+<%=form_with model: @facade.new_viewing_party, local: true, url: user_movie_viewing_party_index_path(@facade.movie.id) do |form|%>
     <%=form.label :movie_id%>
     <%=form.hidden_field :movie_id, value:@facade.movie.id %>
 
@@ -11,7 +11,6 @@
   <br>
   <br>
   <% @facade.users.each do |user| %>
-      <%# <%= check_box_tag user.name, user.id %> 
       <div id="<%=user.id%>">
         <%= check_box_tag 'user_ids[]', user.id%>
         <%= h user.name %>

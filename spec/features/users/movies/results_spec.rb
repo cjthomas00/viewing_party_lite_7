@@ -5,7 +5,7 @@ describe "When I visit the discover movies page, and click on either the Top Mov
     describe "user clicked top movies button" do
       before :each do
         @user = create(:user)
-        visit user_movies_discover_path(@user)
+        visit discover_user_path
         VCR.use_cassette("top_rated_movies") do
           click_button "Discover Top Rated Movies"
         end
@@ -38,7 +38,7 @@ describe "When I visit the discover movies page, and click on either the Top Mov
         VCR.use_cassette("godfather_movie_2") do
           click_link("The Godfather")
         end
-        expect(current_path).to eq(user_movie_path(@user, 238))
+        expect(current_path).to eq(user_movie_path(238))
       end
 
       it 'vote average of each movie' do
@@ -62,7 +62,7 @@ describe "When I visit the discover movies page, and click on either the Top Mov
     describe "user searches by keyword" do
       before :each do
         @user = create(:user, password: "password1", password_confirmation: "password1")
-        visit user_movies_discover_path(@user)
+        visit discover_user_path
         within "#search" do
           fill_in "movie_title", with: "Despicable"
         end
@@ -84,7 +84,7 @@ describe "When I visit the discover movies page, and click on either the Top Mov
         VCR.use_cassette("despicable_me_movie") do
           click_link('Despicable Me')
         end
-        expect(current_path).to eq(user_movie_path(@user, 20352))
+        expect(current_path).to eq(user_movie_path(20352))
       end
 
       it 'vote average of each movie' do
@@ -96,7 +96,7 @@ describe "When I visit the discover movies page, and click on either the Top Mov
       end
 
       it 'there should only be a max of 20 results' do
-        visit user_movies_discover_path(@user)
+        visit discover_user_path
         fill_in "movie_title", with: "Love"
         VCR.use_cassette("search_results_2") do
           click_button "Search by Movie Title"

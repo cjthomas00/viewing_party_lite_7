@@ -4,16 +4,16 @@ class ViewingPartyController < ApplicationController
       flash[:error] = "Please login or register to create a viewing party."
       redirect_to root_path
     else
-      @facade = ViewingPartyFacade.new(params)
+      @facade = ViewingPartyFacade.new(current_user, params)
     end
   end
 
   def create
-    @facade = ViewingPartyFacade.new(params)
+    @facade = ViewingPartyFacade.new(current_user, params)
     viewing_party = ViewingParty.new(viewing_party_params)
     if viewing_party.save
       viewing_party.save
-      host = User.find(params[:user_id])
+      host = current_user
       host.viewing_party_users.create!(viewing_party_id: viewing_party.id, host: true)
 
       params[:user_ids].each do |user_id|
@@ -21,7 +21,7 @@ class ViewingPartyController < ApplicationController
         user.viewing_party_users.create!(viewing_party_id: viewing_party.id, host: false)
       end
 
-      redirect_to user_path(host)
+      redirect_to user_path
       flash[:notice] = "Successfully created viewing party."
     else
       flash[:notice] = viewing_party.errors.full_messages.to_sentence

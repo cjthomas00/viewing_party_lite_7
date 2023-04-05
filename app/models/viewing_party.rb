@@ -6,12 +6,12 @@ class ViewingParty < ApplicationRecord
   validates_presence_of :duration, :party_date, :start_time, :movie_id
   
   def viewing_party_movie
-    MovieFacade.new({id: movie_id}).movie
+    MovieFacade.new(movie_id).movie
   end  
   
   private
   def check_for_movie_duration
-    facade = MovieFacade.new({id: movie_id})
+    facade = MovieFacade.new(movie_id )
     runtime = facade.movie.runtime
 
     if duration >= runtime

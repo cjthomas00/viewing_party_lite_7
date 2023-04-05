@@ -1,8 +1,8 @@
 class UserFacade
   attr_reader :user
 
-  def initialize(params, viewing_party = nil)
-    @user = User.find(params[:id])
+  def initialize(user, viewing_party = nil)
+    @user = user
   end
 
   def service

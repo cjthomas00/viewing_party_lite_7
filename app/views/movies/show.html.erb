@@ -1,7 +1,7 @@
 <h1><%=@facade.movie.title%>'s Detail Page</h1>
-<%= button_to "Create Viewing Party", new_user_movie_viewing_party_path(@facade.user, @facade.movie.id), method: :get%>
+<%= button_to "Create Viewing Party", new_user_movie_viewing_party_path(@facade.movie.id), method: :get%>
 
-<%=button_to "Return to Discover Page", user_movies_discover_path(@facade.user), method: :get%>
+<%=button_to "Return to Discover Page", discover_user_path, method: :get%>
 
 <div id="movie-info">
   <h3>Movie Information</h3>

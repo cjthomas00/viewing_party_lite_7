@@ -25,7 +25,7 @@ RSpec.describe "Register", type: :feature do
       click_button("Register")
       user = User.last
 
-      expect(current_path).to eq(user_path(user))
+      expect(current_path).to eq(user_path)
       expect(page).to have_content("#{user.name}'s Dashboard")
 
       click_link("Home Page")

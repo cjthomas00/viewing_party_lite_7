@@ -15,7 +15,7 @@ RSpec.describe "Logging In" do
 
     click_on "Log In"
 
-    expect(current_path).to eq(user_path(user1))
+    expect(current_path).to eq(user_path)
   end
 
   it "can't log in with invalid credentials" do

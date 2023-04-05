@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.themoviedb.org/3/movie/?api_key=ebf46d9ab88b772502128d76538d0071&language=en-US
+    uri: https://api.themoviedb.org/3/movie/238?api_key=ebf46d9ab88b772502128d76538d0071&language=en-US
     body:
       encoding: US-ASCII
       string: ''
@@ -15,8 +15,8 @@ http_interactions:
       - "*/*"
   response:
     status:
-      code: 404
-      message: Not Found
+      code: 200
+      message: OK
     headers:
       Content-Type:
       - application/json;charset=utf-8
@@ -25,27 +25,47 @@ http_interactions:
       Connection:
       - keep-alive
       Date:
-      - Mon, 03 Apr 2023 22:15:36 GMT
+      - Wed, 05 Apr 2023 18:03:56 GMT
       Server:
       - openresty
-      X-Cascade:
-      - pass
+      Cache-Control:
+      - public, max-age=24122
+      X-Memc:
+      - HIT
+      X-Memc-Key:
+      - 9d48db5c244b9c3e3d162ef155211175
+      X-Memc-Age:
+      - '12590'
+      X-Memc-Expires:
+      - '14843'
+      Etag:
+      - W/"e53826a9c1bef89a70d0c401825854b7"
       Vary:
       - Accept-Encoding
       - Origin
       X-Cache:
-      - Error from cloudfront
+      - Hit from cloudfront
       Via:
-      - 1.1 1c13683c7de319f25e08f83861fc6dc2.cloudfront.net (CloudFront)
+      - 1.1 61ff1927788a811372346b5470412a78.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
       - DEN52-P2
       Alt-Svc:
       - h3=":443"; ma=86400
       X-Amz-Cf-Id:
-      - llpYnXtzlKM9l9WeyqXDc7EjglrcJKkW2IcQw21YazvG_y3jPIynMQ==
+      - TimVwAxDHcY3SNxt-3qOFYHL0vohgOz9ofvQK3_SYi9alEI9UoPetQ==
+      Age:
+      - '17398'
     body:
       encoding: ASCII-8BIT
-      string: '{"success":false,"status_code":34,"status_message":"The resource you
-        requested could not be found."}'
-  recorded_at: Mon, 03 Apr 2023 22:15:36 GMT
+      string: '{"adult":false,"backdrop_path":"/tmU7GeKVybMWFButWEGl2M4GeiP.jpg","belongs_to_collection":{"id":230,"name":"The
+        Godfather Collection","poster_path":"/9Baumh5J9N1nJUYzNkm0xsgjpwY.jpg","backdrop_path":"/3WZTxpgscsmoUk81TuECXdFOD0R.jpg"},"budget":6000000,"genres":[{"id":18,"name":"Drama"},{"id":80,"name":"Crime"}],"homepage":"http://www.thegodfather.com/","id":238,"imdb_id":"tt0068646","original_language":"en","original_title":"The
+        Godfather","overview":"Spanning the years 1945 to 1955, a chronicle of the
+        fictional Italian-American Corleone crime family. When organized crime family
+        patriarch, Vito Corleone barely survives an attempt on his life, his youngest
+        son, Michael steps in to take care of the would-be killers, launching a campaign
+        of bloody revenge.","popularity":109.659,"poster_path":"/3bhkrj58Vtu7enYsRolD1fZdja1.jpg","production_companies":[{"id":4,"logo_path":"/gz66EfNoYPqHTYI4q9UEN4CbHRc.png","name":"Paramount","origin_country":"US"},{"id":10211,"logo_path":null,"name":"Alfran
+        Productions","origin_country":"US"}],"production_countries":[{"iso_3166_1":"US","name":"United
+        States of America"}],"release_date":"1972-03-14","revenue":245066411,"runtime":175,"spoken_languages":[{"english_name":"English","iso_639_1":"en","name":"English"},{"english_name":"Italian","iso_639_1":"it","name":"Italiano"},{"english_name":"Latin","iso_639_1":"la","name":"Latin"}],"status":"Released","tagline":"An
+        offer you can''t refuse.","title":"The Godfather","video":false,"vote_average":8.712,"vote_count":17688}'
+  recorded_at: Wed, 05 Apr 2023 22:53:54 GMT
 recorded_with: VCR 6.1.0
