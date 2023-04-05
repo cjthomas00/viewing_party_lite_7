@@ -1,6 +1,6 @@
 class ViewingPartyController < ApplicationController
   def new
-    if session[:user_id] == nil 
+    if current_user == nil 
       flash[:error] = "Please login or register to create a viewing party."
       redirect_to root_path
     else

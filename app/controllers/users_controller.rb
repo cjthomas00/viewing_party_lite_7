@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def show
-    if session[:user_id] == nil
+    if current_user == nil
       flash[:error] = "Please login or register to visit your dashboard."
       redirect_to root_path
     else
