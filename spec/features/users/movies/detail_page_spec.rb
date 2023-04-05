@@ -4,25 +4,6 @@ RSpec.describe "Details Page", type: :feature do
   describe "When I visit a movie's detail page (/users/:user_id/movies/:movie_id where :id is a valid user id,I should see" do
     before :each do
       @user = create(:user)
-    #   attrs = {
-    #   id: 238,
-    #   title: "The Godfather",
-    #   vote_average: 8.7,
-    #   runtime: 175,
-    #   genres: [
-    #   {
-    #       "id": 18,
-    #       "name": "Drama"
-    #   },
-    #   {
-    #       "id": 80,
-    #       "name": "Crime"
-    #   }
-    #   ],
-    #   overview: "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge."
-    # }
-    #   @movie = Movie.new(attrs)
-      # require 'pry'; binding.pry
       VCR.use_cassette("godfather_movie_2") do
         visit user_movie_path(@user, 238)
       end
@@ -74,8 +55,9 @@ RSpec.describe "Details Page", type: :feature do
     end
     
     it "shows the count of total reviews of the movie" do
+
       within "#movie-info" do
-        expect(page).to have_content("Movie Review Count: 2")
+        expect(page).to have_content("Movie Review Count: 3")
       end
     end
 
@@ -86,6 +68,23 @@ RSpec.describe "Details Page", type: :feature do
         expect(page).to have_content("Created at: 2014-04-10T20:09:40.500Z")
         expect(page).to have_content("Author: crastana")
       end
+    end
+  end
+
+  describe "as a visitor" do
+    before :each do
+      VCR.use_cassette("godfather_movie_11") do
+        visit movie_path(238)
+      end
+    end
+
+    it "I should not be able to create a viewing party" do
+      VCR.use_cassette("godfather_movie_10") do
+        click_button "Create Viewing Party"
+      end
+
+      expect(page.current_path).to eq(movie_path(238))
+      expect(page).to have_content("You must be logged in and registered to view your dashboard")
     end
   end
 end

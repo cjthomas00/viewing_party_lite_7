@@ -34,7 +34,7 @@ RSpec.describe "Register", type: :feature do
       expect(current_path).to eq("/")
 
       within(".existing_users") do 
-        expect(page).to have_link(user.name)
+        expect(page).to have_content(user.email)
       end
     end
 

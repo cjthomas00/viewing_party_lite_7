@@ -52,7 +52,6 @@ class UsersController < ApplicationController
 
   private
   def user_attributes
-    require 'pry'; binding.pry
     params.permit(:name, :email, :password)
   end
 end
