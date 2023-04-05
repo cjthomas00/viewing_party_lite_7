@@ -7,6 +7,15 @@ describe "when I visit the user dashboard page" do
         @user = create(:user)
         @user2 = create(:user)
         @user3 = create(:user)
+
+        visit '/'
+        click_on "Log In"
+
+        fill_in 'Email', with: @user.email
+        fill_in 'Password', with: @user.password
+
+        click_on 'Log In'
+
         @vp1 = ViewingParty.create!({duration: 180, party_date: Date.new(2011, 1, 1,), start_time: '21:00', movie_id: 238})
         @vp2 = ViewingParty.create!({duration: 183, party_date: Date.new(2011, 2, 1,), start_time: '21:00', movie_id: 239})
         @vp3 = ViewingParty.create!({duration: 190, party_date: Date.new(2011, 3, 1,), start_time: '21:00', movie_id: 550})

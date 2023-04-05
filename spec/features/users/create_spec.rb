@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "Register", type: :feature do
   describe "When a user visits the '/register' path" do
     before :each do 
-      @user1 = User.create!(name: "Mike Smith", email: "msmith@gmail.com")
+      @user1 = User.create!(name: "Mike Smith", email: "msmith@gmail.com", password: "password")
       visit "/register"
     end
 
@@ -20,8 +20,11 @@ RSpec.describe "Register", type: :feature do
 
       fill_in "Name", with: "Max Power"
       fill_in "Email", with: "mpower@aol.com"
+      fill_in "Password", with: "password"
+      fill_in "confirmation", with: "password"
       click_button("Register")
       user = User.last
+
 
       expect(current_path).to eq(user_path(user))
       expect(page).to have_content("#{user.name}'s Dashboard")
@@ -31,7 +34,7 @@ RSpec.describe "Register", type: :feature do
       expect(current_path).to eq("/")
 
       within(".existing_users") do 
-        expect(page).to have_link(user.name)
+        expect(page).to have_content(user.email)
       end
     end
 
@@ -53,6 +56,35 @@ RSpec.describe "Register", type: :feature do
       click_button("Register")
       expect(page).to have_content("Name can't be blank")
       expect(current_path).to eq(register_path)
+    end
+  end
+
+  describe "matching passwords" do
+    before :each do 
+      @user2 = build(:user)
+      visit "/register"
+    end
+
+    it "should check if password and password confirmation came through" do
+      fill_in "Name", with: @user2.name
+      fill_in "Email", with: @user2.email
+      fill_in "Password", with: @user2.password
+
+      click_button("Register")
+
+      expect(page).to have_content("Please correctly confirm your password")
+    end
+
+    it "should check if password and password confirmation match" do
+      fill_in "Name", with: @user2.name
+      fill_in "Email", with: @user2.email
+      fill_in "Password", with: @user2.password
+      fill_in "Confirmation", with: 'xyz'
+
+
+      click_button("Register")
+
+      expect(page).to have_content("Please correctly confirm your password")
     end
   end
 end

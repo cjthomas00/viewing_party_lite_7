@@ -11,12 +11,20 @@ describe "When I visit the new viewing party page (/users/:user_id/movies/:movid
     @user7 = create(:user)
     @user8 = create(:user)
 
+    visit '/'
+    click_on "Log In"
+
+    fill_in 'Email', with: @user.email
+    fill_in 'Password', with: @user.password
+
+    click_on 'Log In'
     
     VCR.use_cassette('viewing_party_2') do
       facade = MovieFacade.new({id: 238, user_id: @user.id})
       @movie = facade.movie
       visit new_user_movie_viewing_party_path(@user, @movie.id)
     end
+
   end
 
   describe 'form' do
@@ -70,7 +78,11 @@ describe "When I visit the new viewing party page (/users/:user_id/movies/:movid
       end
 
       expect(page).to have_current_path(user_path(@user))
-      expect(page).to have_content('The Godfather Viewing Party on March 25th, 2023')
+
+
+      within "#hosted-parties" do
+        expect(page).to have_content(@movie.title)
+      end
     end
 
     it 'will validate that the viewing party length is greater than or equal to the duration of the movie' do

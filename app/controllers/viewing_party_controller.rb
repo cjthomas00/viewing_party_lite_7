@@ -1,6 +1,11 @@
 class ViewingPartyController < ApplicationController
   def new
-    @facade = ViewingPartyFacade.new(params)
+    if session[:user_id]
+      @facade = ViewingPartyFacade.new(params)
+    else
+      redirect_to movie_path(params[:id])
+      flash[:notice] = "You must be logged in and registered to view your dashboard"
+    end
   end
 
   def create
